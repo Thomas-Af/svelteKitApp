@@ -76,7 +76,7 @@
     </div>
   {/if}
 </div>
-<!-- <Search /> -->
+<Search data={peoples}/>
 <div class="list">
   {#each peoples as people}
     {#if selectedTag == 'all'}
