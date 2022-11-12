@@ -52,6 +52,30 @@
     selectedCompany = 'all';
   }
 
+  let value:string = '';
+  let array_name:object[] = []; 
+
+  console.log('array_name', array_name.length)
+
+  function searchFunction(event:any) {    
+
+    let value = event.detail.searched.value;
+    let valueMini:string = value.toLowerCase();
+    
+    peoples.forEach(element => {
+      if (element.name.toLowerCase().includes(valueMini)) {
+        array_name.push(element)
+
+        array_name = [...new Set(array_name)]
+
+      } else {
+        if (array_name.includes(element)) {
+          array_name = array_name.filter((element) => element !== element)
+        }
+      }
+    });
+  }
+
 </script>
 
 
@@ -76,24 +100,43 @@
     </div>
   {/if}
 </div>
-<Search data={peoples}/>
+
+<Search data={peoples} on:search={searchFunction} />
+
 <div class="list">
-  {#each peoples as people}
-    {#if selectedTag == 'all'}
-      {#if people.company == selectedCompany}
-        <PeopleCard infos={people} email={$email} pass={$pass}/>
-      {:else if selectedCompany == 'all'}
-        <PeopleCard infos={people} email={$email} pass={$pass}/>
+  {#if array_name.length !== 0}
+    {#each array_name as people}
+      {#if selectedTag == 'all'}
+        {#if people.company == selectedCompany}
+          <PeopleCard infos={people} email={$email} pass={$pass}/>
+        {:else if selectedCompany == 'all'}
+          <PeopleCard infos={people} email={$email} pass={$pass}/>
+        {/if}
+      {:else if selectedCompany =='all'}
+        {#if people.post == selectedTag}
+          <PeopleCard infos={people} email={$email} pass={$pass}/>
+        {:else if selectedTag == 'all'}
+          <PeopleCard infos={people} email={$email} pass={$pass}/>
+        {/if}
       {/if}
-    {:else if selectedCompany =='all'}
-      {#if people.post == selectedTag}
-        <PeopleCard infos={people} email={$email} pass={$pass}/>
-      {:else if selectedTag == 'all'}
-        <PeopleCard infos={people} email={$email} pass={$pass}/>
+    {/each}
+  {:else}
+    {#each peoples as people}
+      {#if selectedTag == 'all'}
+        {#if people.company == selectedCompany}
+          <PeopleCard infos={people} email={$email} pass={$pass}/>
+        {:else if selectedCompany == 'all'}
+          <PeopleCard infos={people} email={$email} pass={$pass}/>
+        {/if}
+      {:else if selectedCompany =='all'}
+        {#if people.post == selectedTag}
+          <PeopleCard infos={people} email={$email} pass={$pass}/>
+        {:else if selectedTag == 'all'}
+          <PeopleCard infos={people} email={$email} pass={$pass}/>
+        {/if}
       {/if}
-    {/if}
-    
-  {/each}
+    {/each}
+  {/if}
 </div>
 
 
