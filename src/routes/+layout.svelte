@@ -6,9 +6,7 @@
     <a href="/login">Login / Account</a>
   </div>
 </nav>
-
 <slot></slot>
-
 <footer>
   <a href="/">Logo</a>
   <div class="links linksFooter">
@@ -19,7 +17,6 @@
 </footer>
 
 <style lang="scss">
-  
 nav, footer {
   display: flex;
   flex-direction: row;

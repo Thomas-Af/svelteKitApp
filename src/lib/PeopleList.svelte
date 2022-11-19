@@ -1,16 +1,13 @@
 <script lang='ts'>
   import type {People} from '$lib/types';
-  
-  export let data:any;
-  const peoples: People[] = data.item
-
-  
   import FilterByTag from './FilterByTag.svelte';
   import PeopleCard from './PeopleCard.svelte';
   import Search from './Search.svelte';
-
   import { email, pass } from '../store.js';
+  
+  export let data:any;
 
+  const peoples: People[] = data.item
   let posts:any = [];
   let companys:any = [];
   
@@ -55,7 +52,6 @@
   let value:string = '';
   let array_name:object[] = []; 
 
-  console.log('array_name', array_name.length)
 
   function searchFunction(event:any) {    
 
